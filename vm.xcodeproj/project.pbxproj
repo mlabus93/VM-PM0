@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6D6FB7571B1A4481002A1B64 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D6FB7561B1A4481002A1B64 /* main.c */; };
+		6D6FB7571B1A4481002A1B64 /* vm.c in Sources */ = {isa = PBXBuildFile; fileRef = 6D6FB7561B1A4481002A1B64 /* vm.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,8 +23,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6D12AF761B1A487E0017C267 /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
+		6D12AF771B1A4B190017C267 /* mcode.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mcode.txt; sourceTree = "<group>"; };
 		6D6FB7531B1A4481002A1B64 /* vm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = vm; sourceTree = BUILT_PRODUCTS_DIR; };
-		6D6FB7561B1A4481002A1B64 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		6D6FB7561B1A4481002A1B64 /* vm.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = vm.c; sourceTree = "<group>"; };
+		6DD7A2671B1A747200C72365 /* output.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = output.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +60,10 @@
 		6D6FB7551B1A4481002A1B64 /* vm */ = {
 			isa = PBXGroup;
 			children = (
-				6D6FB7561B1A4481002A1B64 /* main.c */,
+				6D6FB7561B1A4481002A1B64 /* vm.c */,
+				6D12AF771B1A4B190017C267 /* mcode.txt */,
+				6DD7A2671B1A747200C72365 /* output.txt */,
+				6D12AF761B1A487E0017C267 /* readme.txt */,
 			);
 			path = vm;
 			sourceTree = "<group>";
@@ -117,7 +123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D6FB7571B1A4481002A1B64 /* main.c in Sources */,
+				6D6FB7571B1A4481002A1B64 /* vm.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +240,7 @@
 				6D6FB75C1B1A4481002A1B64 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

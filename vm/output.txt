@@ -1,0 +1,19 @@
+Line  OP    L    M
+-------------------
+ 1    JMP   0    10
+ 2    JMP   0    2
+ 3    INC   0    6
+ 4    LIT   0    13
+ 5    STO   0    4
+ 6    LIT   0    1
+ 7    STO   1    4
+ 8    LIT   0    7
+ 9    STO   0    5
+10    OPR   0    0
+11    INC   0    6
+12    LIT   0    3
+13    STO   0    4
+14    LIT   0    0
+15    STO   0    5
+16    CAL   0    2
+17    SIO   0    2
