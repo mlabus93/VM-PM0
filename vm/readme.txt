@@ -8,6 +8,8 @@
 COMPILE INSTRUCTIONS -
 ----------------------
 
+Compile to executable 'vm'
+
 gcc -o vm vm.c
 
 
@@ -16,4 +18,4 @@ RUN
 
 First argument is input file and second argument is outputfilename
 
-./vm input.txt output.txt
+./vm mcode.txt output.txt

@@ -1,5 +1,5 @@
 //
-//  main.c
+//  vm.c
 //  vm
 //
 //  Created by Michael Labus on 5/30/15.
@@ -22,26 +22,58 @@ typedef struct {
 instruction ReadInput(FILE* input, instruction instructions[], int *lineCount);
 void PrintInstructions(int lineCount, instruction instructions[]);
 void WriteInstructions(FILE* output, int lineCount, instruction instructions[]);
-void FetchCycle();
-void ExecuteCycle();
+void FetchInstruction(instruction currentInstruction, instruction instructionRegister);
+void ExecuteCycle(instruction instructionRegister, int pc);
+void ExecuteOPRInstruction(instruction instructionRegister);
+void ExecuteSIOInstruction(instruction instructionRegister);
+void LIT(instruction instructionRegister);
+void LOD(instruction instructionRegister);
+void STO(instruction instructionRegister);
+void CAL(int pc, instruction instructionRegister);
+void INC(instruction instructionRegister);
+void JMP(int pc, instruction instructionRegister);
+void JPC(int pc, instruction instructionRegister);
 
 int main(int argc, const char * argv[]) {
     
     FILE* input, *output;
     instruction instructions[MAX_CODE_LENGTH];
-    int lineCount;
+    instruction instructionRegister;
+    
+    int lineCount, pc = 0, sp = 0, bp = 1;
     
     input = fopen(argv[1], "r");
     output = fopen(argv[2], "w");
+    
+    // Test if file exists
     if (input == NULL)
     {
         printf("FILE NOT FOUND\n");
         return -1;
     }
+    
+    // Read input instructions into array of structs
     *instructions = ReadInput(input, instructions, &lineCount);
+    
+    //Print instructions to console for debugging
     PrintInstructions(lineCount, instructions);
+    
+    // Write instructions to output file
     WriteInstructions(output, lineCount, instructions);
     
+    // Loop through all instructions
+    while (pc < lineCount)
+    {
+        // Fetch Cycle
+        {
+            FetchInstruction(instructions[pc], instructionRegister);
+            // Increment program counter
+            pc++;
+        }
+        ExecuteCycle(instructionRegister, pc);
+    }
+    
+    // Close files
     fclose(input);
     fclose(output);
     
@@ -53,10 +85,12 @@ instruction ReadInput(FILE* input, instruction instructions[], int *lineCount)
     int i = 0;
     while (!feof(input))
     {
-        
         fscanf(input, "%d %d %d", &instructions[i].op, &instructions[i].l, &instructions[i].m);
-        //printf("%d %d %d\n", instructions[i].op, instructions[i].l, instructions[i].m);
+        if (instructions[i].l >= MAX_LEXI_LEVELS)
+            printf("Invalid instruction: L must be 3 levels or less.\n");
         i++;
+        if (i == MAX_CODE_LENGTH)
+            printf("Max code length of %d reached.\n", MAX_CODE_LENGTH);
     }
     *lineCount = i;
     return *instructions;
@@ -102,8 +136,10 @@ void WriteInstructions(FILE* output, int lineCount, instruction instructions[])
                 break;
         }
     }
+    fprintf(output, "\n");
 }
 
+// Function for console debugging
 void PrintInstructions(int lineCount, instruction instructions[])
 {
     printf("Line  OP    L    M\n");
@@ -144,14 +180,103 @@ void PrintInstructions(int lineCount, instruction instructions[])
                 break;
         }
     }
+    printf("\n");
 }
 
-void FetchCycle()
+void FetchInstruction(instruction currentInstruction, instruction instructionRegister)
+{
+    instructionRegister = currentInstruction;
+}
+
+void ExecuteCycle(instruction instructionRegister, int pc)
+{
+    // Do OPR instruction based on M
+    if (instructionRegister.op == 2)
+    {
+        ExecuteOPRInstruction(instructionRegister);
+    }
+    // Do SIO instruction based on M
+    else if (instructionRegister.op == 9)
+    {
+        ExecuteSIOInstruction(instructionRegister);
+    }
+    // Do all other instructions
+    else
+    {
+        switch (instructionRegister.op) {
+            case 1:
+                LIT(instructionRegister);
+                break;
+            case 3:
+                LOD(instructionRegister);
+                break;
+            case 4:
+                STO(instructionRegister);
+                break;
+            case 5:
+                CAL(pc, instructionRegister);
+                break;
+            case 6:
+                INC(instructionRegister);
+                break;
+            case 7:
+                JMP(pc, instructionRegister);
+                break;
+            case 8:
+                JPC(pc, instructionRegister);
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+void ExecuteOPRInstruction(instruction instructionRegister)
 {
     
 }
 
-void ExecuteCycle()
+void ExecuteSIOInstruction(instruction instructionRegister)
 {
     
 }
+
+void LIT(instruction instructionRegister)
+{
+    
+}
+
+void LOD(instruction instructionRegister)
+{
+    
+}
+
+void STO(instruction instructionRegister)
+{
+    
+}
+
+void CAL(int pc, instruction instructionRegister)
+{
+    
+}
+
+void INC(instruction instructionRegister)
+{
+    
+}
+
+void JMP(int pc, instruction instructionRegister)
+{
+    
+}
+
+void JPC(int pc, instruction instructionRegister)
+{
+    
+}
+
+
+
+
+
